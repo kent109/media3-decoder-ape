@@ -1,4 +1,7 @@
 jdk:
   - openjdk17
+before_install:
+  - apt-get update && apt-get install -y unzip
+  - bash media3-decoder-ape/src/main/jni/download_maclib.sh
 install:
   - ./gradlew :media3-decoder-ape:publishToMavenLocal
