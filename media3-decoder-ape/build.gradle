@@ -166,46 +166,10 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 from components.release
-                pom {
-                    name = 'media3-decoder-ape'
-                    description = "Monkey's Audio (APE) extractor and decoder for AndroidX Media3, built on the official MACLib."
-                    url = 'https://github.com/eugenedibtsev/media3-decoder-ape'
-                    licenses {
-                        license {
-                            name = 'The Apache License, Version 2.0'
-                            url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
-                        }
-                    }
-                    developers {
-                        developer {
-                            id = 'eugenedibtsev'
-                            name = 'Eugene Dibtsev'
-                            url = 'https://github.com/eugenedibtsev'
-                            email = '287062323+eugenedibtsev@users.noreply.github.com'
-                        }
-                    }
-                    scm {
-                        connection = 'scm:git:https://github.com/eugenedibtsev/media3-decoder-ape.git'
-                        developerConnection = 'scm:git:ssh://git@github.com/eugenedibtsev/media3-decoder-ape.git'
-                        url = 'https://github.com/eugenedibtsev/media3-decoder-ape'
-                    }
-                }
+                groupId = 'com.github.kent109'
+                artifactId = 'media3-decoder-ape'
+                version = '1.0.0'
             }
-        }
-        repositories {
-            maven {
-                name = 'staging'
-                url = layout.buildDirectory.dir('staging-deploy')
-            }
-        }
-    }
-
-    signing {
-        def signingKey = System.getenv('SIGNING_KEY')
-        def signingPassword = System.getenv('SIGNING_PASSWORD')
-        if (signingKey != null) {
-            useInMemoryPgpKeys(signingKey, signingPassword)
-            sign publishing.publications.release
         }
     }
 }
