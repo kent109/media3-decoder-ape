@@ -31,9 +31,15 @@ android {
     }
 }
 
+// Capture the library's Media3 version at the project scope, where
+// project(':media3-decoder-ape') resolves to the Project (not a
+// ProjectDependency). Inside a dependencies {} block the same call resolves
+// to a DefaultProjectDependency, which has no media3Version extra property.
+def media3Version = project(':media3-decoder-ape').media3Version
+
 dependencies {
     implementation project(':media3-decoder-ape')
     // Tracks the library's own Media3 version instead of repeating it.
-    implementation "androidx.media3:media3-exoplayer:${project(':media3-decoder-ape').media3Version}"
-    implementation "androidx.media3:media3-ui:${project(':media3-decoder-ape').media3Version}"
+    implementation "androidx.media3:media3-exoplayer:${media3Version}"
+    implementation "androidx.media3:media3-ui:${media3Version}"
 }

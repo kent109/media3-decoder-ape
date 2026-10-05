@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 plugins {
-    id 'com.android.library' version '8.12.3' apply false
-    id 'com.android.application' version '8.12.3' apply false
+    id 'com.android.library' version '9.4.1' apply false
+    id 'com.android.application' version '9.4.1' apply false
 }
 
 // Javac hygiene for every module. Deprecation warnings are printed per call

@@ -19,7 +19,7 @@ group = 'io.github.eugenedibtsev'
 version = '1.0.0'
 
 ext {
-    media3Version = '1.10.1'
+    media3Version = '1.11.1'
 }
 
 // Compatibility probe. `-Pmedia3Override=<version>` resolves every
@@ -41,13 +41,13 @@ android {
     namespace = 'io.github.eugenedibtsev.media3.ape'
     compileSdk 36
     // Pinned so third-party builds reproduce the .so we test against.
-    ndkVersion = '27.0.12077973'
+    ndkVersion = '30.0.16248370'
 
     defaultConfig {
         minSdk 23
         consumerProguardFiles 'consumer-rules.pro'
         ndk {
-            abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86_64'
+            abiFilters 'arm64-v8a'
         }
         externalNativeBuild {
             cmake {
@@ -75,10 +75,6 @@ android {
     // penalizes the NEON kernels roughly tenfold and makes every performance number meaningless.
     testBuildType = 'release'
 
-    testOptions {
-        targetSdk = 34
-    }
-
     publishing {
         singleVariant('release') {
             // Maven Central rejects deployments without sources and javadoc jars.
@@ -93,7 +89,11 @@ android {
 if (project.file('src/main/jni/maclib').exists()) {
     android.externalNativeBuild.cmake {
         path = 'src/main/jni/CMakeLists.txt'
-        version = '3.21.0+'
+        // Pinned to the 3.31.0 CMake installed in the SDK. The original
+        // '3.21.0+' would let AGP auto-select the highest installed >= 3.21.0,
+        // i.e. 4.1.2, whose CMake 4.x removals are not yet compatible with the
+        // NDK toolchain / this CMakeLists.txt. CMakeLists.txt requires >= 3.21.0.
+        version = '3.31.0'
     }
 }
 
